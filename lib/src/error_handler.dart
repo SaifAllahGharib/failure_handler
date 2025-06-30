@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'failure.dart';
+import 'app_failure.dart';
 
 class ErrorHandler {
-  static Failure handle(dynamic error) {
+  static AppFailure handle(dynamic error) {
     /// -------------------- FirebaseAuthException --------------------
     if (error is FirebaseAuthException) {
       switch (error.code) {
