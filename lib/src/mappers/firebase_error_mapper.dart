@@ -18,6 +18,7 @@ class FirebaseErrorMapper extends IErrorMapper {
             StackTrace.current,
           );
         case 'email-already-exists':
+        case 'email-already-in-use':
           return AuthFailure('email_in_use', error.message, StackTrace.current);
         case 'invalid-email':
           return AuthFailure(
