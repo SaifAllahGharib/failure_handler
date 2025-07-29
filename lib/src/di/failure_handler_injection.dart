@@ -8,34 +8,34 @@ import '../mappers/dio_error_mapper.dart';
 import '../mappers/firebase_error_mapper.dart';
 import '../mappers/supabase_error_mapper.dart';
 
-final getIt = GetIt.instance;
+final errorHandlerGetIt = GetIt.instance;
 
 void registerFailureHandlerDependencies() {
-  getIt.registerLazySingleton<IErrorMapper>(
+  errorHandlerGetIt.registerLazySingleton<IErrorMapper>(
     () => const DioErrorMapper(),
     instanceName: 'dio',
   );
-  getIt.registerLazySingleton<IErrorMapper>(
+  errorHandlerGetIt.registerLazySingleton<IErrorMapper>(
     () => const FirebaseErrorMapper(),
     instanceName: 'firebase',
   );
-  getIt.registerLazySingleton<IErrorMapper>(
+  errorHandlerGetIt.registerLazySingleton<IErrorMapper>(
     () => const SupabaseErrorMapper(),
     instanceName: 'supabase',
   );
-  getIt.registerLazySingleton<IErrorMapper>(
+  errorHandlerGetIt.registerLazySingleton<IErrorMapper>(
     () => const DefaultErrorMapper(),
     instanceName: 'default',
   );
 
-  getIt.registerLazySingleton(() => ErrorLogger());
+  errorHandlerGetIt.registerLazySingleton(() => ErrorLogger());
 
-  getIt.registerLazySingleton<ErrorHandler>(
+  errorHandlerGetIt.registerLazySingleton<ErrorHandler>(
     () => ErrorHandler([
-      getIt<IErrorMapper>(instanceName: 'dio'),
-      getIt<IErrorMapper>(instanceName: 'firebase'),
-      getIt<IErrorMapper>(instanceName: 'supabase'),
-      getIt<IErrorMapper>(instanceName: 'default'),
-    ], getIt()),
+      errorHandlerGetIt<IErrorMapper>(instanceName: 'dio'),
+      errorHandlerGetIt<IErrorMapper>(instanceName: 'firebase'),
+      errorHandlerGetIt<IErrorMapper>(instanceName: 'supabase'),
+      errorHandlerGetIt<IErrorMapper>(instanceName: 'default'),
+    ], errorHandlerGetIt()),
   );
 }
