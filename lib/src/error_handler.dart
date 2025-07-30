@@ -3,6 +3,8 @@ import 'package:failure_handler/src/error_logger.dart';
 import 'interfaces/i_error_mapper.dart';
 import 'models/app_failure.dart';
 import 'models/result.dart';
+import 'types/future_result.dart';
+import 'types/stream_result.dart';
 
 class ErrorHandler {
   final List<IErrorMapper> _mappers;
@@ -21,7 +23,7 @@ class ErrorHandler {
     return UnknownFailure(error.toString(), stackTrace ?? StackTrace.current);
   }
 
-  Future<Result<AppFailure, T>> handleFutureWithTryCatch<T>(
+  FutureResult<T> handleFutureWithTryCatch<T>(
     Future<T> Function() action,
   ) async {
     try {
@@ -33,7 +35,7 @@ class ErrorHandler {
     }
   }
 
-  Stream<Result<AppFailure, T>> handleStreamWithTryCatch<T>(
+  StreamResult<T> handleStreamWithTryCatch<T>(
     Stream<T> Function() action,
   ) async* {
     try {
